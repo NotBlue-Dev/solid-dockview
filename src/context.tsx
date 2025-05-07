@@ -11,6 +11,7 @@ import {
   PanelContentRenderer,
   PanelTabRenderer,
   createGroupHeaderComponent,
+  createTabComponent,
   createWatermarkComponent,
 } from "./glue-component";
 
@@ -28,23 +29,37 @@ export function createDockViewContext(props: DockViewProps) {
     };
   };
 
+  const WatermarkComponentClass = createWatermarkComponent(props, addExtraRender);
+  const TabComponentClass = createTabComponent(props, addExtraRender);
+
   const options: DockviewComponentOptions = {
-    parentElement: element,
-    components: {
-      default: PanelContentRenderer,
-    },
-    tabComponents: {
-      default: PanelTabRenderer,
-    },
+    createComponent: (options) => new PanelContentRenderer(),
+    createTabComponent: (options) => props.createTabComponent ? new TabComponentClass() : new PanelTabRenderer(),
+    defaultTabComponent: props.defaultTabComponent,
     singleTabMode: props.singleTabMode,
-    watermarkComponent: createWatermarkComponent(props, addExtraRender),
-    createPrefixHeaderActionsElement: createGroupHeaderComponent(props, "prefixHeaderActionsComponent", addExtraRender),
-    createLeftHeaderActionsElement: createGroupHeaderComponent(props, "leftHeaderActionsComponent", addExtraRender),
-    createRightHeaderActionsElement: createGroupHeaderComponent(props, "rightHeaderActionsComponent", addExtraRender),
+    defaultRenderer: props.defaultRenderer,
+    theme: props.theme,
+    className: props.class,
+    hideBorders: props.hideBorders,
+    locked: props.locked,
+    disableDnd: props.disableDnd,
+    disableFloatingGroups: props.disableFloatingGroups,
+    floatingGroupBounds: props.floatingGroupBounds,
+    createWatermarkComponent: () => new WatermarkComponentClass(),
+    createPrefixHeaderActionComponent: createGroupHeaderComponent(props, "prefixHeaderActionsComponent", addExtraRender),
+    createLeftHeaderActionComponent: createGroupHeaderComponent(props, "leftHeaderActionsComponent", addExtraRender),
+    createRightHeaderActionComponent: createGroupHeaderComponent(props, "rightHeaderActionsComponent", addExtraRender),
+    scrollbars: props.scrollbars,
+    debug: props.debug,
+    dndEdges: props.dndEdges,
+    popoutUrl: props.popoutUrl,
+    noPanelsOverlay: props.noPanelsOverlay,
+    disableAutoResizing: props.disableAutoResizing,
+    disableTabsOverflowList: props.disableTabsOverflowList,
   };
 
   props.onBeforeCreate?.(options, props);
-  const dockview = new DockviewComponent(options);
+  const dockview = new DockviewComponent(element, options);
 
   // add event listeners
   dockviewEventNames.forEach((eventName) => {

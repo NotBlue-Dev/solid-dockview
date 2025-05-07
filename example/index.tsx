@@ -6,7 +6,7 @@ import "dockview-core/dist/styles/dockview.css";
 import { StarSVG } from "./icons";
 import nyan from "./nyancat.ico";
 import "./style.scss";
-import { DockviewComponent } from "dockview-core";
+import { DockviewComponent, themeLight } from "dockview-core";
 
 type MyDocument = {
   id: string;
@@ -52,12 +52,26 @@ const App = () => {
         <a href="https://github.com/lyonbot/solid-dockview">GitHub</a>
       </p>
       <DockView
-        class="dockview-theme-light"
+        theme={themeLight}
         style={{ height: "500px", border: "1px solid #ccc" }}
         onReady={({ dockview }) => {
           console.log("dockview ready", dockview);
           currentDockview = dockview;
-          window.dockview = dockview;
+        }}
+        createTabComponent={(props) => {
+          return (
+            <div class="myTab">
+              {props?.title}
+              <button
+                class="tab-action"
+                onClick={(e) => {
+                  props.close();
+                }}
+              >
+                x
+              </button>
+            </div>
+          );
         }}
         singleTabMode="default"
         leftHeaderActionsComponent={(props) => (

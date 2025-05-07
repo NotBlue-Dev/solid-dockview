@@ -5,13 +5,14 @@ import {
   IHeaderActionsRenderer,
   ITabRenderer,
   IWatermarkRenderer,
+  TabPartInitParameters,
   WatermarkRendererInitParameters,
 } from "dockview-core";
 import { PanelContentRendererParams } from "./context";
 import { Accessor, JSXElement, createComponent, createMemo } from "solid-js";
 import { Portal } from "solid-js/web";
 import { DockViewProps } from "./DockView";
-import { DockViewGroupHeaderComponentProps, DockViewWatermarkProps } from "./user-component";
+import { DockViewCreateTabComponentProps, DockViewGroupHeaderComponentProps, DockViewWatermarkProps } from "./user-component";
 import { withReactiveProps } from "./utils";
 
 type AddExtraRender = (render: Accessor<JSXElement>) => () => void;
@@ -131,6 +132,8 @@ export class PanelContentRenderer implements IContentRenderer {
   }
 }
 
+
+
 export class PanelTabRenderer implements ITabRenderer {
   private _params!: PanelContentRendererParams;
 
@@ -141,4 +144,43 @@ export class PanelTabRenderer implements ITabRenderer {
   init(params: IGroupPanelInitParameters): void {
     this._params = params.params as PanelContentRendererParams;
   }
+}
+
+export function createTabComponent(props: DockViewProps, addExtraRender: AddExtraRender) {
+  return class TabComponent implements ITabRenderer {
+    private _element!: HTMLElement;
+    private _remove?: () => void;
+
+    get element(): HTMLElement {
+      return this._element;
+    }
+
+    init(params: TabPartInitParameters): void {
+
+      const outerElement = document.createElement("div");
+      outerElement.style.display = "contents";
+      this._element = outerElement;
+
+      const tabProps: DockViewCreateTabComponentProps = {
+        ...params,
+        containerApi: params.containerApi,
+        close: () => {
+          params.api.close();
+        }
+      };
+
+      const jsxRender = () => (
+        <Portal
+          mount={outerElement}
+          ref={(div) => {
+            div.style.display = "contents";
+          }}
+        >
+          {!!props.createTabComponent && createComponent(props.createTabComponent, tabProps)}
+        </Portal>
+      );
+
+      this._remove = addExtraRender(jsxRender);
+    }
+  };
 }

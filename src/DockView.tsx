@@ -5,7 +5,7 @@ import { DockviewEventListeners, dockviewEventNames } from "./events";
 import { strictKeys } from "./utils";
 import style from "./style.scss?inline";
 import type { DockviewComponent, DockviewComponentOptions } from "dockview-core";
-import { DockViewGroupHeaderComponentProps, DockViewWatermarkProps } from "./user-component";
+import { DockViewCreateTabComponentProps, DockViewGroupHeaderComponentProps, DockViewWatermarkProps } from "./user-component";
 
 let styleLoadCounter = 0;
 
@@ -22,8 +22,22 @@ export type DockViewProps = ParentProps<
     leftHeaderActionsComponent?: (props: DockViewGroupHeaderComponentProps) => JSX.Element;
     prefixHeaderActionsComponent?: (props: DockViewGroupHeaderComponentProps) => JSX.Element;
     rightHeaderActionsComponent?: (props: DockViewGroupHeaderComponentProps) => JSX.Element;
-
-    orientation?: DockviewComponentOptions["orientation"];
+    createTabComponent?: (props: DockViewCreateTabComponentProps) => JSX.Element;
+    defaultTabComponent?: DockviewComponentOptions["defaultTabComponent"];
+    scrollbars?: DockviewComponentOptions["scrollbars"];
+    debug?: DockviewComponentOptions["debug"];
+    defaultRenderer?: DockviewComponentOptions["defaultRenderer"];
+    dndEdges?: DockviewComponentOptions["dndEdges"];
+    popoutUrl?: DockviewComponentOptions["popoutUrl"];
+    noPanelsOverlay?: DockviewComponentOptions["noPanelsOverlay"];
+    disableAutoResizing?: DockviewComponentOptions["disableAutoResizing"];
+    disableTabsOverflowList?: DockviewComponentOptions["disableTabsOverflowList"];
+    createComponent?: DockviewComponentOptions["createComponent"];
+    hideBorders?: DockviewComponentOptions["hideBorders"];
+    theme?: DockviewComponentOptions["theme"];
+    class?: DockviewComponentOptions["className"];
+    locked?: DockviewComponentOptions["locked"];
+    disableDnd?: DockviewComponentOptions["disableDnd"];
     singleTabMode?: DockviewComponentOptions["singleTabMode"];
     disableFloatingGroups?: DockviewComponentOptions["disableFloatingGroups"];
     floatingGroupBounds?: DockviewComponentOptions["floatingGroupBounds"];
@@ -43,7 +57,22 @@ export const dockViewPropKeys = strictKeys<DockViewProps>()([
   "prefixHeaderActionsComponent",
   "rightHeaderActionsComponent",
 
-  "orientation",
+  "defaultRenderer",
+  "defaultTabComponent",
+  "scrollbars",
+  "debug",
+  "dndEdges",
+  "popoutUrl",
+  "noPanelsOverlay",
+  "disableAutoResizing",
+  "disableTabsOverflowList",
+  "createComponent",
+  "hideBorders",
+  "createTabComponent",
+  "theme",
+  "class",
+  "locked",
+  "disableDnd",
   "singleTabMode",
   "disableFloatingGroups",
   "floatingGroupBounds",
