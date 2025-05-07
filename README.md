@@ -1,5 +1,7 @@
 # solid-dockview
 
+This project was created by [lyonbot](https://github.com/lyonbot), I fixed it and updated it to dockview-core 4.2.5 and added all the missings props
+
 Docking Layout for Solid.js, based on dockview-core
 
 [GitHub](https://github.com/lyonbot/solid-dockview) | [Example](https://lyonbot.github.io/solid-dockview/) | [Documentation](https://lyonbot.github.io/solid-dockview/)
