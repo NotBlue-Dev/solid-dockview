@@ -1,5 +1,5 @@
 {
-  "name": "solid-dockview",
+  "name": "dockview-solidjs",
   "version": "1.0.2",
   "description": "Docking Layout for Solid.js, based on dockview-core",
   "type": "module",
@@ -17,15 +17,16 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lyonbot/solid-dockview.git"
+    "url": "git+https://github.com/NotBlue-Dev/solid-dockview.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "lyonbot",
+  "maintainers": ["notblue"],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/lyonbot/solid-dockview/issues"
+    "url": "https://github.com/NotBlue-Dev/solid-dockview/issues"
   },
-  "homepage": "https://github.com/lyonbot/solid-dockview#readme",
+  "homepage": "https://github.com/NotBlue-Dev/solid-dockview#readme",
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^6.15.0",
     "@typescript-eslint/parser": "^6.15.0",
