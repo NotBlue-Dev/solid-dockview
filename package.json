@@ -1,6 +1,6 @@
 {
   "name": "dockview-solidjs",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Docking Layout for Solid.js, based on dockview-core",
   "type": "module",
   "main": "dist/index.js",

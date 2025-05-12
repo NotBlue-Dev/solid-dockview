@@ -12,7 +12,11 @@ import { PanelContentRendererParams } from "./context";
 import { Accessor, JSXElement, createComponent, createMemo } from "solid-js";
 import { Portal } from "solid-js/web";
 import { DockViewProps } from "./DockView";
-import { DockViewCreateTabComponentProps, DockViewGroupHeaderComponentProps, DockViewWatermarkProps } from "./user-component";
+import {
+  DockViewCreateTabComponentProps,
+  DockViewGroupHeaderComponentProps,
+  DockViewWatermarkProps,
+} from "./user-component";
 import { withReactiveProps } from "./utils";
 
 type AddExtraRender = (render: Accessor<JSXElement>) => () => void;
@@ -132,8 +136,6 @@ export class PanelContentRenderer implements IContentRenderer {
   }
 }
 
-
-
 export class PanelTabRenderer implements ITabRenderer {
   private _params!: PanelContentRendererParams;
 
@@ -156,7 +158,6 @@ export function createTabComponent(props: DockViewProps, addExtraRender: AddExtr
     }
 
     init(params: TabPartInitParameters): void {
-
       const outerElement = document.createElement("div");
       outerElement.style.display = "contents";
       this._element = outerElement;
@@ -166,7 +167,7 @@ export function createTabComponent(props: DockViewProps, addExtraRender: AddExtr
         containerApi: params.containerApi,
         close: () => {
           params.api.close();
-        }
+        },
       };
 
       const jsxRender = () => (

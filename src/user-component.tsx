@@ -13,6 +13,7 @@ export interface DockViewWatermarkProps extends WatermarkRendererInitParameters 
 }
 
 export interface DockViewCreateTabComponentProps extends TabPartInitParameters {
+  title?: string;
   close(): void;
 }
 

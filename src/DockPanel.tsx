@@ -31,6 +31,13 @@ export type DockPanelProps = ParentProps<{
   floating?: AddPanelOptions["floating"];
   position?: AddPanelPositionOptions;
 
+  initialHeight?: number;
+  initialWidth?: number;
+  maximumHeight?: number;
+  maximumWidth?: number;
+  minimumHeight?: number;
+  minimumWidth?: number;
+
   onCreate?: (event: DockPanelEvent<{}>) => void;
   onOpen?: (event: DockPanelEvent<{}>) => void;
   onClose?: (event: DockPanelEvent<{}>) => void;
@@ -55,6 +62,12 @@ export function DockPanel(props: DockPanelProps) {
     component: "default",
     tabComponent: "default",
     title: String(props.title),
+    initialHeight: props.initialHeight,
+    initialWidth: props.initialWidth,
+    maximumHeight: props.maximumHeight,
+    maximumWidth: props.maximumWidth,
+    minimumHeight: props.minimumHeight,
+    minimumWidth: props.minimumWidth,
     position: props.position,
     floating: props.floating as any,
     params: {

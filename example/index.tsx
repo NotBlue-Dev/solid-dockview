@@ -100,6 +100,7 @@ const App = () => {
         {/* panel with custom tab */}
         <DockPanel
           title="Third"
+          maximumWidth={200}
           position={{ referencePanel: "inevitable", direction: "right" }}
           onCreate={({ panel }) => {
             panel.api.setSize({ width: 300 });
